@@ -5,7 +5,7 @@ Work in progress - use on your own risk!!!
 
 ## Setup
 
-WARNING: These scripts has currently many hardcoded assumptions:
+WARNING: These scripts has currently many hard-coded assumptions:
 
 
 * It is expected, that you have Host (L)Ubuntu 16.04 LTS, 64-bit
@@ -34,7 +34,7 @@ sudo apt-get install virt-manager qemu-kvm libvirt-bin \
 * You mast have local web server providing unpacked tree of 
   `debian-8.5.0-amd64-CD-1.iso`
   
-* This debian tree must be availabel on URL http://192.168.122.1/isos/debian8_cd1
+* This debian tree must be available on URL http://192.168.122.1/isos/debian8_cd1
 
 When you met all requirements you may create new debian VM issuing command like
 
@@ -43,6 +43,14 @@ When you met all requirements you may create new debian VM issuing command like
 ```
 
 ## Bugs
+
+# APT repository error at the end of installation
+
+Workaround: enter "Continue"
+
+# GRUB install location dialog (should be silent)
+
+Workaround: select `/dev/vda` manually
 
 # We should use mirror of debian tree instead of unpacked ISOs
 
