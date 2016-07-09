@@ -26,7 +26,7 @@ virt-install \
               --virt-type kvm \
               --name ${vm} \
               --ram 1024 \
-              --disk /opt/virtual-images/KVM/${vm}.raw,size=8,sparse=true \
+              --disk /opt/virtual-images/KVM/${vm}.raw,size=8,sparse=true,bus=virtio \
               --vnc \
               --location $instdir \
               --initrd-inject=preseed.cfg \
