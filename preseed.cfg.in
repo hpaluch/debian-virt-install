@@ -102,7 +102,7 @@ d-i apt-setup/use_mirror boolean false
 tasksel tasksel/first multiselect
 
 # Individual additional packages to install
-d-i pkgsel/include string openssh-server vim-tiny
+d-i pkgsel/include string openssh-server vim-nox mc
 
 popularity-contest popularity-contest/participate boolean false
 
@@ -113,11 +113,10 @@ d-i grub-installer/bootdev string /dev/vda
 d-i finish-install/reboot_in_progress note
 
 ### Mirror settings
-# on http://192.168.122.1/isos/debian8_cd1 is unpacked debian CD1
 d-i mirror/country string manual
-d-i mirror/http/hostname string 192.168.122.1
-d-i mirror/http/directory string /isos/debian8_cd1
-d-i mirror/http/proxy string
+d-i mirror/http/hostname string @MIRROR_HOST@
+d-i mirror/http/directory string @MIRROR_DIR@
+d-i mirror/http/proxy string http://192.168.122.1:3128
 #d-i mirror/suite string jessie
 # ISO has no GPG files...
 d-i debian-installer/allow_unauthenticated boolean true

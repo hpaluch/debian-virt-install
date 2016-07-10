@@ -3,12 +3,15 @@
 # to override this value, use:
 #    VM_DOMAIN=mydomain.dom ./create-debian.sh vm1
 VM_DOMAIN=${VM_DOMAIN:-kvm.dom}
+diskbase=${VM_DISKBASE:-/opt/virtual-images/KVM}
+# in gigabytes
+disksize=${VM_DISKSIZE:-8}
+mirror_host=${MIRROR_HOST:-ftp.linux.cz}
+mirror_dir=${MIRROR_DIR:-/pub/linux/debian}
 
-distiso=/opt/install/OS/Debian/debian-8.5.0-amd64-CD-1.iso
-distdir=/isos/debian8_cd1
+booturl=http://$mirror_host$mirror_dir/dists/jessie/main/installer-amd64/
 
-# see mirror_installer.sh
-instdir=/opt/install/OS/Debian/tmp/ftp.us.debian.org/debian/dists/stable/main/installer-amd64
+diskfile=$diskbase/${vm}.raw
 
 [ $# -eq 1 ] || {
 
@@ -24,20 +27,34 @@ invalid_chars=`echo "$vm" | tr -d 'a-z' | tr -d 'A-Z' | tr -d '0-9' | tr -d  '-'
 }
 
 # virt-install example inspired by http://honk.sigxcpu.org/con/Preseeding_Debian_virtual_machines_with_virt_install.html
-# WARNING: filename must be exaclte preseed.cfg !
+# WARNING: filename must be exactly preseed.cfg !
 set -xe
 cd `dirname $0`
 
-sed 's/@HOSTNAME@/'"${vm}"'/;s/@DOMAIN@/'"${VM_DOMAIN}"'/' \
+sed 's/@HOSTNAME@/'"${vm}"'/;
+     s/@DOMAIN@/'"${VM_DOMAIN}"'/;
+     s/@MIRROR_HOST@/'"$mirror_host"'/;
+     s!@MIRROR_DIR@!'"$mirror_dir"'!;' \
    preseed.cfg.in > preseed.cfg
 
-virt-install \
+#diff preseed.cfg{.in,}
+#exit 2
+
+http_proxy=http://127.0.0.1:3128 virt-install \
               --virt-type kvm \
               --name ${vm} \
               --ram 1024 \
-              --disk /opt/virtual-images/KVM/${vm}.raw,size=8,sparse=true,bus=virtio \
+              --disk "$diskfile,size=8,sparse=true,bus=virtio" \
               --vnc \
-              --location $instdir \
+              --location $booturl \
               --initrd-inject=preseed.cfg \
               -x "auto"
+
+cat <<EOF
+# to STOP vm:
+virsh destroy ${vm}
+# to DELETE vm:
+virsh undefine ${vm}
+rm -- ${diskfile}
+EOF
 
