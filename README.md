@@ -5,7 +5,6 @@ Work in progress - use on your own risk!!!
 
 ## Setup
 
-WARNING: These scripts has currently many hard-coded assumptions:
 
 
 * It is expected, that you have Host (L)Ubuntu 16.04 LTS, 64-bit
@@ -19,6 +18,7 @@ sudo apt-get install virt-manager qemu-kvm libvirt-bin \
 > Please Logout/Login to ensure that you are member of new
 > `libvirtd` group
 
+WARNING: These scripts has currently many hard-coded assumptions:
 
 * There must exist writable directory `/opt/install/OS/Debian/tmp`
   for Debian netboot files (required by `virt-install`).
@@ -47,10 +47,6 @@ When you met all requirements you may create new debian VM issuing command like
 # APT repository error at the end of installation
 
 Workaround: enter "Continue"
-
-# GRUB install location dialog (should be silent)
-
-Workaround: select `/dev/vda` manually
 
 # We should use mirror of debian tree instead of unpacked ISOs
 
