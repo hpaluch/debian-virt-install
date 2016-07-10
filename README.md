@@ -100,5 +100,8 @@ When you met all requirements you may create new debian VM issuing command like
 ```bash
 VM_DOMAIN=mydomain.dom ./create-debian.sh debian1
 ```
+> Default login is `debian` with password `insecure`.
+> This user can `sudo` to root (when asked for password enter again
+> `insecure`
 
 
