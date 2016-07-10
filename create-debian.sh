@@ -11,7 +11,6 @@ mirror_dir=${MIRROR_DIR:-/pub/linux/debian}
 
 booturl=http://$mirror_host$mirror_dir/dists/jessie/main/installer-amd64/
 
-diskfile=$diskbase/${vm}.raw
 
 [ $# -eq 1 ] || {
 
@@ -25,6 +24,7 @@ invalid_chars=`echo "$vm" | tr -d 'a-z' | tr -d 'A-Z' | tr -d '0-9' | tr -d  '-'
 	echo "Use only: a-z A-Z 0-9 - (must be valid hostname)"
 	exit 2
 }
+diskfile=$diskbase/${vm}.raw
 
 # virt-install example inspired by http://honk.sigxcpu.org/con/Preseeding_Debian_virtual_machines_with_virt_install.html
 # WARNING: filename must be exactly preseed.cfg !

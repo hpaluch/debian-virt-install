@@ -50,7 +50,7 @@ sudo apt-get install squid
  #	See cache_replacement_policy for a discussion of this policy.
  #Default:
 -# maximum_object_size 4 MB
-+maximum_object_size 32 MB
++maximum_object_size 40 MB
  
  #  TAG: cache_dir
  #	Format:
