@@ -104,18 +104,4 @@ When you met all requirements you may create new debian VM issuing command like
 VM_DOMAIN=mydomain.dom ./create-debian.sh debian1
 ```
 
-## Bugs
-
-# APT repository error at the end of installation
-
-Workaround: enter "Continue"
-
-# We should use mirror of debian tree instead of unpacked ISOs
-
-Installing from unpacked ISO is comfortable but has drawbacks:
-
-* no GPG checking
-* APT is later unable to work with it...
-
-
 
