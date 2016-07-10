@@ -12,7 +12,7 @@ Work in progress - use on your own risk!!!
 ```bash
 sudo apt-get install virt-manager qemu-kvm libvirt-bin \
                      ubuntu-vm-builder bridge-utils virt-viewer \
-                     virt-install
+                     virtinst
 ``` 
 
 > Please Logout/Login to ensure that you are member of new
