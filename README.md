@@ -18,7 +18,7 @@ sudo apt-get install virt-manager qemu-kvm libvirt-bin \
 > Please Logout/Login to ensure that you are member of new
 > `libvirtd` group
 
-* Install Squid proxy for faster VM re-creation:
+* Install Squid proxy on you KVM Host for faster VM re-creation:
 ```bash
 sudo apt-get install squid
 ```
@@ -79,10 +79,7 @@ systemctl restart squid
 ```
 
 
-
-
-
-WARNING: These scripts has currently many hard-coded assumptions:
+WARNING: These scripts have currently many hard-coded assumptions:
 
 * KVM NAT network is expected to have 192.168.122.1 gateway IP address
   (default) - squid must listen also there...
