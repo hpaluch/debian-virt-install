@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# to override this value, use:
+#    VM_DOMAIN=mydomain.dom ./create-debian.sh vm1
+VM_DOMAIN=${VM_DOMAIN:-kvm.dom}
 
 distiso=/opt/install/OS/Debian/debian-8.5.0-amd64-CD-1.iso
 distdir=/isos/debian8_cd1
@@ -22,6 +27,10 @@ invalid_chars=`echo "$vm" | tr -d 'a-z' | tr -d 'A-Z' | tr -d '0-9' | tr -d  '-'
 # WARNING: filename must be exaclte preseed.cfg !
 set -xe
 cd `dirname $0`
+
+sed 's/@HOSTNAME@/'"${vm}"'/;s/@DOMAIN@/'"${VM_DOMAIN}"'/' \
+   preseed.cfg.in > preseed.cfg
+
 virt-install \
               --virt-type kvm \
               --name ${vm} \

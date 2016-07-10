@@ -1,0 +1,7 @@
+# generated from preseed.cfg.in
+preseed.cfg
+
+# editor backup files
+*.swp
+*~
+
